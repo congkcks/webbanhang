@@ -1,0 +1,93 @@
+﻿@model WebApplication4.Models.TDanhMucSp
+@{
+    Layout = "~/Views/Product/_Layout1.cshtml";
+}
+
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large" src="@Url.Content("/ProDuctImage/Images/Images/"+Model.AnhDaiDien)" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel owl-loaded owl-drag">
+                        @foreach (var item in ViewBag.anhsanpham)
+                        {
+                            <img data-imgbigurl="@Url.Content("/ProDuctImage/Images/Images/" + item.TenFileAnh)" src="@Url.Content("/ProDuctImage/Images/Images/"+item.TenFileAnh)" alt="">
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>@Model.TenSp</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>(18 reviews)</span>
+                    </div>
+                    <div class="product__details__price">@Model.GiaNhoNhat</div>
+                    <p>
+                        @Model.GioiThieuSp
+                    </p>
+                    <div class="product__details__quantity">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <span class="dec qtybtn">-</span>
+                                <input type="text" value="1">
+                                <span class="inc qtybtn">+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("AddToCart", "GioHang", new { GiaLonNhat = Model.GiaLonNhat, TenSp = Model.TenSp, MaSp = Model.MaSp.Trim(),AnhDaiDien=Model.AnhDaiDien})" class="primary-btn">ADD TO CART</a>
+
+                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <ul>
+                        <li><b>Availability</b> <span>@Model.MaLoai</span></li>
+                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                        <li><b>Weight</b> <span>@Model.CanNang</span></li>
+                        <li>
+                            <b>Share on</b>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+      var input = document.getElementsByClassName('dec qtybtn');
+        // Remove the first element found
+        if (input.length > 0) {
+            input[0].remove();
+        }
+    var input1 = document.getElementsByClassName('inc qtybtn');
+    // Remove the first element found
+    if (input1.length > 0) {
+        input1[0].remove();
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+

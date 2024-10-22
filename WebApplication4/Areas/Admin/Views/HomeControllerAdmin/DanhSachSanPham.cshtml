@@ -1,0 +1,63 @@
+﻿@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<WebApplication4.Models.TDanhMucSp>
+@{
+    ViewData["Title"] = "DanhSachSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h1>DanhSachSanPham</h1>
+
+<p>
+    <a asp-action="ThemSanPhamMoi">Create New</a>
+</p>
+<table class="table">
+    <thead class="table-warning">
+        <tr>
+            <th>
+                TenSp
+            </th>
+            <th>
+               Can Nang 
+            </th>
+            <th>
+                Gia Lon Nhat
+            </th>
+            <th>
+                Gia Nho Nhat
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr class="table-success">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanNang)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaLonNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNhoNhat)
+            </td>
+            <td>
+                <a asp-action="ThemSanPhamMoi" asp-route-id="@item.MaSp" class="btn btn-success">Them</a> |
+                <a asp-action="SuaSanPham" asp-route-id="@item.MaSp" class="btn btn-success">Sua</a> |
+                <a asp-action="XoaSp" asp-route-id="@item.MaSp" class=" btn btn-success">Xoa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<ul class="pagination">
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+        <li class="@(i == Model.PageNumber ? "page-item active" : "page-item")">
+            <a class="page-link" href="@Url.Action("DanhSachSanPham", new { page = i })">@i</a>
+        </li>
+    }
+</ul>

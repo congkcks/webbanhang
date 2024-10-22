@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "ViewMoi";
+}
+
+<h1>ViewMoi</h1>
+<input type="text" name="name" value="" id="keyword"/>
+<button type="button" id="btnSearch"></button>
+<div id="product-list"></div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function performSearch() {
+                var keyword = $("#keyword").val();
+                $.ajax({
+                    url: "@Url.Action("Search", "Home")",
+                    type: "GET",
+                    data: { keyword: keyword },
+                    success: function (data) {
+
+                        $("#product-list").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX call failed:", status, error);
+                        console.log("Response:", xhr.responseText);
+                    }
+                });
+            }
+
+            $("#btnSearch").click(function () {
+                performSearch();
+            });
+
+            $("#keyword").keyup(function () {
+                performSearch();
+            });
+        });
+    </script>
+}
